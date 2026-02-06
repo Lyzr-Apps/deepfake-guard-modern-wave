@@ -11,7 +11,8 @@ import { Separator } from '@/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import {
   Shield, Settings as SettingsIcon, Activity, Save, Key,
-  Home as HomeIcon, FileSearch, Bell, Lock, Users, Sliders
+  Home as HomeIcon, FileSearch, Bell, Lock, Users, Sliders,
+  Layout, History as HistoryIcon
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -20,8 +21,10 @@ function Sidebar({ currentPath }: { currentPath: string }) {
   const navigate = useNavigate()
 
   const navItems = [
-    { path: '/', label: 'Detection Dashboard', icon: HomeIcon },
-    { path: '/compliance', label: 'Compliance Center', icon: FileSearch },
+    { path: '/dashboard', label: 'Dashboard', icon: Layout },
+    { path: '/', label: 'Detection', icon: HomeIcon },
+    { path: '/history', label: 'History', icon: HistoryIcon },
+    { path: '/compliance', label: 'Compliance', icon: FileSearch },
     { path: '/settings', label: 'Settings', icon: SettingsIcon }
   ]
 
@@ -74,6 +77,45 @@ function Sidebar({ currentPath }: { currentPath: string }) {
   )
 }
 
+// Top Navigation Tabs
+function TopNav({ currentPath }: { currentPath: string }) {
+  const navigate = useNavigate()
+
+  const tabs = [
+    { path: '/dashboard', label: 'Dashboard', icon: Layout },
+    { path: '/', label: 'Detection', icon: Shield },
+    { path: '/history', label: 'History', icon: HistoryIcon },
+    { path: '/compliance', label: 'Compliance', icon: FileSearch },
+    { path: '/settings', label: 'Settings', icon: SettingsIcon }
+  ]
+
+  return (
+    <div className="bg-[#0A1628] border-b border-cyan-900/20">
+      <div className="flex items-center gap-1 px-6">
+        {tabs.map((tab) => {
+          const Icon = tab.icon
+          const isActive = currentPath === tab.path
+          return (
+            <button
+              key={tab.path}
+              onClick={() => navigate(tab.path)}
+              className={cn(
+                "flex items-center gap-2 px-4 py-3 border-b-2 transition-colors",
+                isActive
+                  ? "border-[#00D4FF] text-[#00D4FF]"
+                  : "border-transparent text-gray-400 hover:text-cyan-300"
+              )}
+            >
+              <Icon className="h-4 w-4" />
+              <span className="text-sm font-medium">{tab.label}</span>
+            </button>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 // Header component
 function Header() {
   return (
@@ -118,6 +160,7 @@ export default function Settings() {
       <Sidebar currentPath="/settings" />
 
       <div className="flex-1 flex flex-col overflow-hidden">
+        <TopNav currentPath="/settings" />
         <Header />
 
         <main className="flex-1 overflow-auto">
