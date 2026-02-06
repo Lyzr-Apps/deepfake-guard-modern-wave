@@ -1,0 +1,115 @@
+{
+  "agent_name": "Video Analysis Agent",
+  "agent_id": "6985821ab90162af337b1dec",
+  "agent_purpose": "analyzer",
+  "description": "Video deepfake detection analysis with frame-level findings and confidence scores",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "is_deepfake": "boolean",
+      "confidence_score": "number",
+      "threat_level": "string",
+      "findings": [
+        {
+          "category": "string",
+          "severity": "string",
+          "description": "string",
+          "frame_range": "string"
+        }
+      ],
+      "technical_details": {
+        "facial_artifacts_detected": "boolean",
+        "lighting_inconsistencies": "boolean",
+        "temporal_anomalies_found": "boolean",
+        "lip_sync_mismatch": "boolean",
+        "gan_indicators": [
+          "any"
+        ],
+        "frames_analyzed": "number",
+        "suspicious_frame_ranges": [
+          "any"
+        ]
+      },
+      "recommendations": [
+        "string"
+      ]
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string",
+      "analysis_duration_ms": "number"
+    }
+  },
+  "example_response": {
+    "status": "error",
+    "result": {
+      "is_deepfake": false,
+      "confidence_score": 0,
+      "threat_level": "none",
+      "findings": [
+        {
+          "category": "other",
+          "severity": "low",
+          "description": "No video file or video data detected in request. Unable to perform deepfake visual signature analysis.",
+          "frame_range": ""
+        }
+      ],
+      "technical_details": {
+        "facial_artifacts_detected": false,
+        "lighting_inconsistencies": false,
+        "temporal_anomalies_found": false,
+        "lip_sync_mismatch": false,
+        "gan_indicators": [],
+        "frames_analyzed": 0,
+        "suspicious_frame_ranges": []
+      },
+      "recommendations": [
+        "Submit the actual video file or a valid video data stream for detailed deepfake analysis.",
+        "Ensure the video is in a supported format and meets quality requirements for accurate assessment."
+      ]
+    },
+    "metadata": {
+      "agent_name": "Video Analysis Agent",
+      "timestamp": "2024-06-12T22:37:37Z",
+      "analysis_duration_ms": 12
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-02-06T05:57:51.315570",
+  "test_message_used": "Analyze this sample data for testing",
+  "actual_test_response": {
+    "status": "error",
+    "result": {
+      "is_deepfake": false,
+      "confidence_score": 0,
+      "threat_level": "none",
+      "findings": [
+        {
+          "category": "other",
+          "severity": "low",
+          "description": "No video file or video data detected in request. Unable to perform deepfake visual signature analysis.",
+          "frame_range": ""
+        }
+      ],
+      "technical_details": {
+        "facial_artifacts_detected": false,
+        "lighting_inconsistencies": false,
+        "temporal_anomalies_found": false,
+        "lip_sync_mismatch": false,
+        "gan_indicators": [],
+        "frames_analyzed": 0,
+        "suspicious_frame_ranges": []
+      },
+      "recommendations": [
+        "Submit the actual video file or a valid video data stream for detailed deepfake analysis.",
+        "Ensure the video is in a supported format and meets quality requirements for accurate assessment."
+      ]
+    },
+    "metadata": {
+      "agent_name": "Video Analysis Agent",
+      "timestamp": "2024-06-12T22:37:37Z",
+      "analysis_duration_ms": 12
+    }
+  },
+  "test_passed": true
+}

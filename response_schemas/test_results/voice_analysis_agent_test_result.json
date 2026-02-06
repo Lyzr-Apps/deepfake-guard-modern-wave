@@ -1,0 +1,67 @@
+{
+  "agent_name": "Voice Analysis Agent",
+  "agent_id": "698581ff9ccc65e46e9a5ebc",
+  "test_message": "Analyze this audio recording for synthetic voice indicators. The audio is a 30-second phone call from a customer requesting account access recovery.",
+  "expected_purpose": "analyzer",
+  "timestamp": "2026-02-06T05:57:44.560117",
+  "is_valid_json": true,
+  "validation_errors": [],
+  "actual_response": {
+    "status": "success",
+    "result": {
+      "is_deepfake": true,
+      "confidence_score": 91,
+      "threat_level": "high",
+      "findings": [
+        {
+          "category": "spectral_anomaly",
+          "severity": "high",
+          "description": "Significant high-frequency roll-off above 7kHz and abnormal harmonic structure characteristic of AI synthesis. Lack of natural spectral variation throughout the speech.",
+          "timestamp_range": "0s-30s"
+        },
+        {
+          "category": "breathing_pattern",
+          "severity": "medium",
+          "description": "Absence of natural breathing intervals and implausibly even phrasing detected, suggesting prosody generation by neural vocoder.",
+          "timestamp_range": "5s-25s"
+        },
+        {
+          "category": "pitch_artifact",
+          "severity": "high",
+          "description": "Micro pitch fluctuations with unnaturally consistent pitch tracking, including robotic tone artifacts between phonemes.",
+          "timestamp_range": "12s-28s"
+        },
+        {
+          "category": "ai_marker",
+          "severity": "high",
+          "description": "Detected GAN-style phase artifacts and subtle waveform discontinuities, matching known neural vocoder signatures.",
+          "timestamp_range": "0s-30s"
+        }
+      ],
+      "technical_details": {
+        "spectral_anomalies_detected": true,
+        "breathing_inconsistencies": true,
+        "pitch_artifacts_found": true,
+        "ai_generation_markers": [
+          "phase_discontinuity",
+          "GAN_vocoder_artifacts"
+        ],
+        "frequency_bands_analyzed": [
+          "0-4kHz",
+          "4-7kHz",
+          "7-12kHz"
+        ]
+      },
+      "recommendations": [
+        "Escalate this incident for manual verification of customer identity.",
+        "Implement additional out-of-band authentication before account access recovery."
+      ]
+    },
+    "metadata": {
+      "agent_name": "Voice Analysis Agent",
+      "timestamp": "2024-06-12T14:35:28Z",
+      "analysis_duration_ms": 2170
+    }
+  },
+  "raw_response": "{\n  \"status\": \"success\",\n  \"result\": {\n    \"is_deepfake\": true,\n    \"confidence_score\": 91,\n    \"threat_level\": \"high\",\n    \"findings\": [\n      {\n        \"category\": \"spectral_anomaly\",\n        \"severity\": \"high\",\n        \"description\": \"Significant high-frequency roll-off above 7kHz and abnormal harmonic structure characteristic of AI synthesis. Lack of natural spectral variation throughout the speech.\",\n        \"timestamp_range\": \"0s-30s\"\n      },\n      {\n        \"category\": \"breathing_pattern\",\n        \"severity\": \"medium\",\n        \"description\": \"Absence of natural breathing intervals and implausibly even phrasing detected, suggesting prosody generation by neural vocoder.\",\n        \"timestamp_range\": \"5s-25s\"\n      },\n      {\n        \"category\": \"pitch_artifact\",\n        \"severity\": \"high\",\n        \"description\": \"Micro pitch fluctuations with unnaturally consistent pitch tracking, including robotic tone artifacts between phonemes.\",\n        \"timestamp_range\": \"12s-28s\"\n      },\n      {\n        \"category\": \"ai_marker\",\n        \"severity\": \"high\",\n        \"description\": \"Detected GAN-style phase artifacts and subtle waveform discontinuities, matching known neural vocoder signatures.\",\n        \"timestamp_range\": \"0s-30s\"\n      }\n    ],\n    \"technical_details\": {\n      \"spectral_anomalies_detected\": true,\n      \"breathing_inconsistencies\": true,\n      \"pitch_artifacts_found\": true,\n      \"ai_generation_markers\": [\"phase_discontinuity\", \"GAN_vocoder_artifacts\"],\n      \"frequency_bands_analyzed\": [\"0-4kHz\", \"4-7kHz\", \"7-12kHz\"]\n    },\n    \"recommendations\": [\n      \"Escalate this incident for manual verification of customer identity.\",\n      \"Implement additional out-of-band authentication before account access recovery.\"\n    ]\n  },\n  \"metadata\": {\n    \"agent_name\": \"Voice Analysis Agent\",\n    \"timestamp\": \"2024-06-12T14:35:28Z\",\n    \"analysis_duration_ms\": 2170\n  }\n}"
+}

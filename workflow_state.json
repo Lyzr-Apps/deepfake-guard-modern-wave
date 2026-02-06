@@ -1,0 +1,88 @@
+{
+  "workflow_status": "complete",
+  "creation_timestamp": "2026-02-06T00:00:00Z",
+  "platform_name": "DeepShield BFSI Deepfake Detection Platform",
+  "agents_created": {
+    "total": 4,
+    "manager": 1,
+    "sub_agents": 3,
+    "status": "all_agents_created"
+  },
+  "agent_details": [
+    {
+      "agent_id": "6985825ac613a65b3c419393",
+      "name": "Detection Coordinator",
+      "type": "manager",
+      "status": "created",
+      "response_schema_saved": true,
+      "manages": [
+        "698581ff9ccc65e46e9a5ebc",
+        "6985821ab90162af337b1dec",
+        "69858236094c8b2d4207dc5d"
+      ]
+    },
+    {
+      "agent_id": "698581ff9ccc65e46e9a5ebc",
+      "name": "Voice Analysis Agent",
+      "type": "sub-agent",
+      "status": "created",
+      "response_schema_saved": true,
+      "managed_by": "6985825ac613a65b3c419393"
+    },
+    {
+      "agent_id": "6985821ab90162af337b1dec",
+      "name": "Video Analysis Agent",
+      "type": "sub-agent",
+      "status": "created",
+      "response_schema_saved": true,
+      "managed_by": "6985825ac613a65b3c419393"
+    },
+    {
+      "agent_id": "69858236094c8b2d4207dc5d",
+      "name": "Text Analysis Agent",
+      "type": "sub-agent",
+      "status": "created",
+      "response_schema_saved": true,
+      "managed_by": "6985825ac613a65b3c419393"
+    }
+  ],
+  "response_schemas": [
+    {
+      "agent_name": "Detection Coordinator",
+      "schema_file": "response_schemas/detection_coordinator_response.json",
+      "purpose": "manager"
+    },
+    {
+      "agent_name": "Voice Analysis Agent",
+      "schema_file": "response_schemas/voice_analysis_agent_response.json",
+      "purpose": "analyzer"
+    },
+    {
+      "agent_name": "Video Analysis Agent",
+      "schema_file": "response_schemas/video_analysis_agent_response.json",
+      "purpose": "analyzer"
+    },
+    {
+      "agent_name": "Text Analysis Agent",
+      "schema_file": "response_schemas/text_analysis_agent_response.json",
+      "purpose": "analyzer"
+    }
+  ],
+  "workflow_structure": {
+    "nodes": 6,
+    "edges": 7,
+    "entry_point": "media_input",
+    "manager_node": "detection_coordinator",
+    "sub_agent_nodes": [
+      "voice_analysis",
+      "video_analysis",
+      "text_analysis"
+    ],
+    "output_node": "detection_output"
+  },
+  "next_steps": [
+    "UI generation for detection dashboard",
+    "Integration with media upload services",
+    "Compliance reporting configuration"
+  ]
+}

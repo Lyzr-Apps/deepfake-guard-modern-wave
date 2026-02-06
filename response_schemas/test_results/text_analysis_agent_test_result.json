@@ -1,0 +1,60 @@
+{
+  "agent_name": "Text Analysis Agent",
+  "agent_id": "69858236094c8b2d4207dc5d",
+  "test_message": "Evaluate this customer email for AI-generation patterns: 'Dear Sir/Madam, I am writing to request immediate access to my account as I need to transfer funds urgently due to an emergency situation involving my family.'",
+  "expected_purpose": "analyzer",
+  "timestamp": "2026-02-06T05:58:00.783831",
+  "is_valid_json": true,
+  "validation_errors": [],
+  "actual_response": {
+    "status": "success",
+    "result": {
+      "is_deepfake": true,
+      "confidence_score": 74,
+      "threat_level": "medium",
+      "findings": [
+        {
+          "category": "linguistic_anomaly",
+          "severity": "medium",
+          "description": "The phrase 'Dear Sir/Madam' and the formal construction is common in template-based or AI-generated text, especially when lacking personal reference.",
+          "text_excerpt": "Dear Sir/Madam"
+        },
+        {
+          "category": "ai_pattern",
+          "severity": "medium",
+          "description": "Urgency combined with generic emergency statements is a hallmark of AI-driven social engineering attempts. The sentence structure is linear and lacks individual nuance.",
+          "text_excerpt": "I need to transfer funds urgently due to an emergency situation involving my family."
+        },
+        {
+          "category": "social_engineering",
+          "severity": "high",
+          "description": "Explicitly invokes an emergency situation and urgency to provoke quick action, a common manipulation tactic found in phishing or AI-crafted emails.",
+          "text_excerpt": "urgent ... emergency situation involving my family"
+        }
+      ],
+      "technical_details": {
+        "linguistic_anomalies_detected": true,
+        "stylometric_inconsistencies": false,
+        "prompt_injection_detected": false,
+        "social_engineering_indicators": true,
+        "ai_generation_markers": [
+          "template-like salutation",
+          "generic emergency scenario",
+          "urgent language"
+        ],
+        "perplexity_score": 8.7,
+        "vocabulary_diversity": 0.22
+      },
+      "recommendations": [
+        "Initiate secondary verification of sender identity before granting access.",
+        "Flag message for manual review due to potential social engineering and AI-generation indicators."
+      ]
+    },
+    "metadata": {
+      "agent_name": "Text Analysis Agent",
+      "timestamp": "2024-06-13T13:07:26Z",
+      "analysis_duration_ms": 643
+    }
+  },
+  "raw_response": "{\n  \"status\": \"success\",\n  \"result\": {\n    \"is_deepfake\": true,\n    \"confidence_score\": 74,\n    \"threat_level\": \"medium\",\n    \"findings\": [\n      {\n        \"category\": \"linguistic_anomaly\",\n        \"severity\": \"medium\",\n        \"description\": \"The phrase 'Dear Sir/Madam' and the formal construction is common in template-based or AI-generated text, especially when lacking personal reference.\",\n        \"text_excerpt\": \"Dear Sir/Madam\"\n      },\n      {\n        \"category\": \"ai_pattern\",\n        \"severity\": \"medium\",\n        \"description\": \"Urgency combined with generic emergency statements is a hallmark of AI-driven social engineering attempts. The sentence structure is linear and lacks individual nuance.\",\n        \"text_excerpt\": \"I need to transfer funds urgently due to an emergency situation involving my family.\"\n      },\n      {\n        \"category\": \"social_engineering\",\n        \"severity\": \"high\",\n        \"description\": \"Explicitly invokes an emergency situation and urgency to provoke quick action, a common manipulation tactic found in phishing or AI-crafted emails.\",\n        \"text_excerpt\": \"urgent ... emergency situation involving my family\"\n      }\n    ],\n    \"technical_details\": {\n      \"linguistic_anomalies_detected\": true,\n      \"stylometric_inconsistencies\": false,\n      \"prompt_injection_detected\": false,\n      \"social_engineering_indicators\": true,\n      \"ai_generation_markers\": [\"template-like salutation\", \"generic emergency scenario\", \"urgent language\"],\n      \"perplexity_score\": 8.7,\n      \"vocabulary_diversity\": 0.22\n    },\n    \"recommendations\": [\n      \"Initiate secondary verification of sender identity before granting access.\",\n      \"Flag message for manual review due to potential social engineering and AI-generation indicators.\"\n    ]\n  },\n  \"metadata\": {\n    \"agent_name\": \"Text Analysis Agent\",\n    \"timestamp\": \"2024-06-13T13:07:26Z\",\n    \"analysis_duration_ms\": 643\n  }\n}"
+}

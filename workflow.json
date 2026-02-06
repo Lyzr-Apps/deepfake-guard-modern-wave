@@ -1,0 +1,225 @@
+{
+  "workflow_name": "DeepShield BFSI Deepfake Detection Platform",
+  "workflow_description": "Multi-modal deepfake detection system with specialized voice, video, and text analysis agents coordinated by a manager agent",
+  "nodes": [
+    {
+      "id": "media_input",
+      "type": "Input",
+      "label": "Media Upload",
+      "nodeCategory": "input",
+      "position": {
+        "x": 100,
+        "y": 200
+      },
+      "data": {
+        "description": "User uploads media for deepfake analysis (audio, video, or text)"
+      }
+    },
+    {
+      "id": "detection_coordinator",
+      "type": "Agent",
+      "label": "Detection Coordinator",
+      "nodeCategory": "agent",
+      "position": {
+        "x": 400,
+        "y": 200
+      },
+      "data": {
+        "agent_id": "6985825ac613a65b3c419393",
+        "agent_name": "Detection Coordinator",
+        "agent_type": "manager",
+        "description": "Orchestrates multi-modal deepfake analysis by routing media to appropriate specialized agents",
+        "provider": "OpenAI",
+        "model": "gpt-4.1",
+        "temperature": 0.2,
+        "managed_agents": [
+          {
+            "id": "698581ff9ccc65e46e9a5ebc",
+            "name": "Voice Analysis Agent"
+          },
+          {
+            "id": "6985821ab90162af337b1dec",
+            "name": "Video Analysis Agent"
+          },
+          {
+            "id": "69858236094c8b2d4207dc5d",
+            "name": "Text Analysis Agent"
+          }
+        ]
+      }
+    },
+    {
+      "id": "voice_analysis",
+      "type": "Agent",
+      "label": "Voice Analysis Agent",
+      "nodeCategory": "agent",
+      "position": {
+        "x": 400,
+        "y": 400
+      },
+      "data": {
+        "agent_id": "698581ff9ccc65e46e9a5ebc",
+        "agent_name": "Voice Analysis Agent",
+        "agent_type": "sub-agent",
+        "description": "Analyzes audio files for synthetic voice indicators including spectral anomalies",
+        "provider": "OpenAI",
+        "model": "gpt-4.1",
+        "temperature": 0.1
+      }
+    },
+    {
+      "id": "video_analysis",
+      "type": "Agent",
+      "label": "Video Analysis Agent",
+      "nodeCategory": "agent",
+      "position": {
+        "x": 600,
+        "y": 400
+      },
+      "data": {
+        "agent_id": "6985821ab90162af337b1dec",
+        "agent_name": "Video Analysis Agent",
+        "agent_type": "sub-agent",
+        "description": "Examines video content for visual deepfake signatures including facial manipulation artifacts",
+        "provider": "OpenAI",
+        "model": "gpt-4.1",
+        "temperature": 0.1
+      }
+    },
+    {
+      "id": "text_analysis",
+      "type": "Agent",
+      "label": "Text Analysis Agent",
+      "nodeCategory": "agent",
+      "position": {
+        "x": 800,
+        "y": 400
+      },
+      "data": {
+        "agent_id": "69858236094c8b2d4207dc5d",
+        "agent_name": "Text Analysis Agent",
+        "agent_type": "sub-agent",
+        "description": "Evaluates text communications for AI-generation patterns including linguistic anomalies",
+        "provider": "OpenAI",
+        "model": "gpt-4.1",
+        "temperature": 0.1
+      }
+    },
+    {
+      "id": "detection_output",
+      "type": "Output",
+      "label": "Threat Report",
+      "nodeCategory": "end",
+      "position": {
+        "x": 600,
+        "y": 600
+      },
+      "data": {
+        "description": "Unified threat report with compliance data and escalation recommendations"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "source": "media_input",
+      "target": "detection_coordinator",
+      "type": "default"
+    },
+    {
+      "id": "e2",
+      "source": "detection_coordinator",
+      "target": "voice_analysis",
+      "type": "default"
+    },
+    {
+      "id": "e3",
+      "source": "detection_coordinator",
+      "target": "video_analysis",
+      "type": "default"
+    },
+    {
+      "id": "e4",
+      "source": "detection_coordinator",
+      "target": "text_analysis",
+      "type": "default"
+    },
+    {
+      "id": "e5",
+      "source": "voice_analysis",
+      "target": "detection_output",
+      "type": "default"
+    },
+    {
+      "id": "e6",
+      "source": "video_analysis",
+      "target": "detection_output",
+      "type": "default"
+    },
+    {
+      "id": "e7",
+      "source": "text_analysis",
+      "target": "detection_output",
+      "type": "default"
+    }
+  ],
+  "agents": [
+    {
+      "agent_id": "6985825ac613a65b3c419393",
+      "name": "Detection Coordinator",
+      "type": "manager",
+      "description": "Orchestrates multi-modal deepfake analysis by routing media to appropriate specialized agents, aggregates detection results into unified threat scores, generates compliance-ready reports, and determines escalation actions based on configurable thresholds",
+      "provider": "OpenAI",
+      "model": "gpt-4.1",
+      "temperature": 0.2,
+      "top_p": 1,
+      "managed_agents": [
+        "698581ff9ccc65e46e9a5ebc",
+        "6985821ab90162af337b1dec",
+        "69858236094c8b2d4207dc5d"
+      ],
+      "response_schema_file": "response_schemas/detection_coordinator_response.json"
+    },
+    {
+      "agent_id": "698581ff9ccc65e46e9a5ebc",
+      "name": "Voice Analysis Agent",
+      "type": "sub-agent",
+      "description": "Analyzes audio files for synthetic voice indicators including spectral anomalies, breathing pattern inconsistencies, pitch artifacts, and AI-generated speech markers; provides confidence scores and detailed technical findings",
+      "provider": "OpenAI",
+      "model": "gpt-4.1",
+      "temperature": 0.1,
+      "top_p": 1,
+      "response_schema_file": "response_schemas/voice_analysis_agent_response.json"
+    },
+    {
+      "agent_id": "6985821ab90162af337b1dec",
+      "name": "Video Analysis Agent",
+      "type": "sub-agent",
+      "description": "Examines video content for visual deepfake signatures including facial manipulation artifacts, lighting inconsistencies, temporal anomalies, lip-sync mismatches, and GAN-generated indicators; outputs frame-level analysis with detection confidence",
+      "provider": "OpenAI",
+      "model": "gpt-4.1",
+      "temperature": 0.1,
+      "top_p": 1,
+      "response_schema_file": "response_schemas/video_analysis_agent_response.json"
+    },
+    {
+      "agent_id": "69858236094c8b2d4207dc5d",
+      "name": "Text Analysis Agent",
+      "type": "sub-agent",
+      "description": "Evaluates text communications for AI-generation patterns including linguistic anomalies, stylometric inconsistencies, prompt injection attempts, and social engineering indicators typical of synthetic content",
+      "provider": "OpenAI",
+      "model": "gpt-4.1",
+      "temperature": 0.1,
+      "top_p": 1,
+      "response_schema_file": "response_schemas/text_analysis_agent_response.json"
+    }
+  ],
+  "metadata": {
+    "created_at": "2026-02-06T00:00:00Z",
+    "total_agents": 4,
+    "manager_agents": 1,
+    "sub_agents": 3,
+    "platform": "DeepShield BFSI",
+    "use_case": "Multi-modal deepfake detection for banking and financial services"
+  }
+}
